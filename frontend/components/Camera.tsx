@@ -3,24 +3,22 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   Animated,
   Dimensions,
   Platform,
   ScrollView,
-  ImageBackground,
 } from "react-native";
 import { Camera } from "expo-camera";
 import { Challenge } from "./Challenge";
 
 const { height, width } = Dimensions.get("window");
 const screenRatio = height / width;
-const staticImage = require("../assets/images/panda.png");
 
 export function ChallengeCamera() {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraReady, setCameraReady] = useState(false);
   const [desiredRatio, setDesiredRatio] = useState("16:9");
+  const [challengeSizeRatio, setChallengeSizeRatio] = useState(1);
   const cameraRef = useRef(null);
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
@@ -95,16 +93,21 @@ export function ChallengeCamera() {
 
         <View style={styles.carouselContainer}>
           {/* Carousel */}
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.carousel}>
+          <ScrollView decelerationRate="fast" horizontal={true} showsHorizontalScrollIndicator={false} style={styles.carousel}
+            // scrollEventThrottle={8} onScroll={(event) => {
+            //   console.log('asdasd');
+            //   // setChallengeSizeRatio(0.5);
+            //   console.log(event.nativeEvent.contentOffset.x, event.nativeEvent.contentSize.width);
+            // }}
+            snapToInterval={width / 3}
+          >
             {/* Padding, Android only accepts this not padding-top */}
-            <View style={{ width: width / 2 - challengeSize / 2 }}></View>
-            <Challenge onPress={snap} challengeSize={challengeSize} center={center}></Challenge>
-            <View style={{ width: width * 0.1 }}></View>
-            <Challenge onPress={snap} challengeSize={challengeSize} center={center}></Challenge>
-            <View style={{ width: width * 0.1 }}></View>
-            <Challenge onPress={snap} challengeSize={challengeSize} center={center}></Challenge>
+            <View style={{ width: width / 2 - challengeSize / 2 - (width / 6 - challengeSize / 2) }}></View>
+            <Challenge onPress={snap} challengeSize={challengeSize} centerLeft={fromLeft}></Challenge>
+            <Challenge onPress={snap} challengeSize={challengeSize} centerLeft={fromLeft}></Challenge>
+            <Challenge onPress={snap} challengeSize={challengeSize} centerLeft={fromLeft}></Challenge>
             {/* Padding, Android only accepts this not padding-top */}
-            <View style={{ width: width / 2 - challengeSize / 2 }}></View>
+            <View style={{ width: width / 2 - challengeSize / 2 - (width / 6 - challengeSize / 2) }}></View>
           </ScrollView>
         </View>
 
@@ -124,7 +127,6 @@ const challengeSize = snapButtonSize - snapButtonBorderThickness * 2;
 const fromLeft = (width - snapButtonSize) / 2
 const paddingBottom = 20
 const fromTop = height - (snapButtonSize + paddingBottom)
-const center = [fromLeft, fromTop]
 
 const styles = StyleSheet.create({
   effectcontainer: {
