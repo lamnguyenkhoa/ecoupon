@@ -86,11 +86,19 @@ export function ChallengeCamera() {
 
         <View style={styles.carouselContainer}>
           {/* Carousel */}
-          <ScrollView horizontal={true} style={styles.carousel}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.carousel}>
+            <View style={{ width: width / 2 - challengeSize / 2 }}></View>
             <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
             <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
             <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
             <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
+            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
+            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
+            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
+            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
+            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
+            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
+            <View style={{ width: width / 2 - challengeSize / 2 }}></View>
           </ScrollView>
         </View>
 
@@ -131,30 +139,25 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonContainer: {
-    flex: 0,
-    backgroundColor: "transparent",
-    flexDirection: "row",
+    position: 'absolute',
   },
   carouselContainer: {
     flex: 1,
     flexDirection: "row",
   },
   button: {
-    marginBottom: 20,
     borderRadius: roundBorderRadius,
     width: snapButtonSize,
     height: snapButtonSize,
-    alignSelf: "flex-end",
     left: (width - snapButtonSize) / 2,
+    top: height - (snapButtonSize + 20),
     borderWidth: snapButtonBorderThickness,
     borderColor: "white",
     backgroundColor: 'transparent'
   },
   carousel: {
     alignSelf: "flex-end",
-    marginBottom: 35,
-    paddingLeft: width / 2 - challengeSize / 2,
-    paddingRight: width / 2 - challengeSize / 2,
+    marginBottom: 20 + snapButtonBorderThickness
   },
   challenge: {
     width: challengeSize,
