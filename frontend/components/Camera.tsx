@@ -7,11 +7,14 @@ import {
   Animated,
   Dimensions,
   Platform,
+  ScrollView,
+  ImageBackground,
 } from "react-native";
 import { Camera } from "expo-camera";
 
 const { height, width } = Dimensions.get("window");
 const screenRatio = height / width;
+const staticImage = require("../assets/images/panda.png");
 
 export function ChallengeCamera() {
   const [hasPermission, setHasPermission] = useState(null);
@@ -79,8 +82,20 @@ export function ChallengeCamera() {
           setRatio();
         }}
       >
-        {/* Snap button */}
+
+
+        <View style={styles.carouselContainer}>
+          {/* Carousel */}
+          <ScrollView horizontal={true} style={styles.carousel}>
+            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
+            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
+            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
+            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
+          </ScrollView>
+        </View>
+
         <View style={styles.buttonContainer}>
+          {/* Snap button */}
           <TouchableOpacity
             style={styles.button}
             onPress={async () => {
@@ -93,33 +108,58 @@ export function ChallengeCamera() {
             }}
           ></TouchableOpacity>
         </View>
+
       </Camera>
     </Animated.View>
   );
 }
 
-const snapButtonRadius = 120;
+const snapButtonSize = 120;
+const snapButtonBorderThickness = 15;
+const challengeSize = snapButtonSize - snapButtonBorderThickness * 2;
+const roundBorderRadius = Math.round((width + height) / 2)
+
+const imageStyle = {
+  borderRadius: roundBorderRadius,
+}
 
 const styles = StyleSheet.create({
   effectcontainer: {
     flex: 1,
   },
   camera: {
-    flex: 1.2,
+    flex: 1,
   },
   buttonContainer: {
-    flex: 1,
+    flex: 0,
     backgroundColor: "transparent",
+    flexDirection: "row",
+  },
+  carouselContainer: {
+    flex: 1,
     flexDirection: "row",
   },
   button: {
     marginBottom: 20,
-    borderRadius: Math.round(width + height) / 2,
-    width: snapButtonRadius,
-    height: snapButtonRadius,
+    borderRadius: roundBorderRadius,
+    width: snapButtonSize,
+    height: snapButtonSize,
     alignSelf: "flex-end",
-    left: (width - snapButtonRadius) / 2,
-    borderWidth: 15,
+    left: (width - snapButtonSize) / 2,
+    borderWidth: snapButtonBorderThickness,
     borderColor: "white",
+    backgroundColor: 'transparent'
   },
+  carousel: {
+    alignSelf: "flex-end",
+    marginBottom: 35,
+    paddingLeft: width / 2 - challengeSize / 2,
+    paddingRight: width / 2 - challengeSize / 2,
+  },
+  challenge: {
+    width: challengeSize,
+    height: challengeSize,
+    borderColor: "red",
+    alignItems: "center",
+  }
 });
