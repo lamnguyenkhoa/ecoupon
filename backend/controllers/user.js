@@ -1,21 +1,21 @@
-const utils = require("./utils");
-const User = require("../models/user");
+const utils = require('./utils');
+const User = require('../models/user');
 
 exports.create = async (req, res) => {
   // Validate requests
   if (!req.body.name) {
     return res.status(400).send({
-      message: "Missing name!",
+      message: 'Missing name!',
     });
   }
   if (!req.body.email) {
     return res.status(400).send({
-      message: "Missing email!",
+      message: 'Missing email!',
     });
   }
   if (!req.body.password) {
     return res.status(400).send({
-      message: "Missing password!",
+      message: 'Missing password!',
     });
   }
 
@@ -36,7 +36,7 @@ exports.create = async (req, res) => {
     .catch((err) => {
       console.log(err);
       res.status(500).send({
-        message: "Error when creating user!",
+        message: 'Error when creating user!',
       });
     });
 };
@@ -55,7 +55,7 @@ exports.findOne = async (req, res) => {
       if (!data) {
         // return the error messages
         return res.status(404).send({
-          message: "No user is found with this id!",
+          message: 'No user is found with this id!',
         });
       }
       // else, store this data to toReturn
@@ -64,6 +64,6 @@ exports.findOne = async (req, res) => {
     // Catching the error when assessing the DB
     .catch((err) => {
       console.log(err);
-      res.status(500).send({ message: "Error when accessing the database!" });
+      res.status(500).send({ message: 'Error when accessing the database!' });
     });
 };

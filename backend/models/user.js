@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const ObjectID = mongoose.Schema.Types.ObjectId;
 
 const UserSchema = new mongoose.Schema({
@@ -8,4 +8,4 @@ const UserSchema = new mongoose.Schema({
   ownedCoupon: { type: [ObjectID] },
 });
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model('User', UserSchema);

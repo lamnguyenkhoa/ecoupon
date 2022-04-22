@@ -13,7 +13,7 @@ function updateData(controller, req, res) {
     .catch((err) => {
       console.log(err);
       res.status(500).send({
-        message: "Error when updating Data!",
+        message: 'Error when updating Data!',
       });
     });
 }
@@ -28,15 +28,15 @@ function deleteData(controller, req, res) {
         // If no id found -> return error message
         return res
           .status(404)
-          .send({ message: "No data found to be deleted!" });
+          .send({ message: 'No data found to be deleted!' });
       }
       // Else, the data should be deleted successfully
-      res.status(200).send({ message: "Data is deleted successfully!" });
+      res.status(200).send({ message: 'Data is deleted successfully!' });
     })
     // Catching error when accessing the database
     .catch((err) => {
       console.log(err);
-      res.status(500).send({ message: "Error accessing the database!" });
+      res.status(500).send({ message: 'Error accessing the database!' });
     });
 }
 
@@ -51,7 +51,7 @@ function findAllData(controller, req, res) {
     // Catching error when accessing the database
     .catch((err) => {
       console.log(err);
-      res.status(500).send({ message: "Error when accessing the database!" });
+      res.status(500).send({ message: 'Error when accessing the database!' });
     });
 }
 
