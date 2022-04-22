@@ -15,18 +15,14 @@ Schema
 ```javascript
 {
   name: { type: String, required: true },
-  email: { type: String, required: true },
-  password: { type: String, required: true },
+  googleId: { type: String, required: true },
   ownedCoupon: { type: [ObjectID] },
-  role: {
-    type: String,
-    enum: ['USER', 'COMPANY'],
-    required: true,
-  },
 }
 ```
 
 GET
+
+`/user`: display user profile. Required logged in and has a session.
 
 `/user/getall`: return all users data.
 
