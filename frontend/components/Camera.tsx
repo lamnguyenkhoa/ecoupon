@@ -8,9 +8,11 @@ import {
   Platform,
   ScrollView,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import { Camera } from "expo-camera";
 import { Challenge } from "./Challenge";
+import { Ionicons } from "@expo/vector-icons";
 
 const { height, width } = Dimensions.get("window");
 const screenRatio = height / width;
@@ -47,7 +49,8 @@ const challenges = [
   },
 ];
 
-export function ChallengeCamera() {
+//@ts-ignore
+export function ChallengeCamera({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraReady, setCameraReady] = useState(false);
   const [desiredRatio, setDesiredRatio] = useState("16:9");
@@ -168,6 +171,26 @@ export function ChallengeCamera() {
 
         {/* Snap button border */}
         <View pointerEvents="none" style={styles.button}></View>
+
+        {/*@ts-ignore */}
+        <TouchableOpacity
+          onPress={() => navigation.navigate("HomeScreen")}
+          //@ts-ignore
+          style={{
+            position: "absolute",
+            left: "5%",
+            top: "10%",
+            backgroundColor: "#fff",
+            borderRadius: "50%",
+            height: 35,
+            width: 35,
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Ionicons name="arrow-back-outline" size={20} color="black" />
+        </TouchableOpacity>
       </Camera>
     </Animated.View>
   );

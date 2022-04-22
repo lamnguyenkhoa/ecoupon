@@ -84,7 +84,8 @@ export function Coupons({ navigation }: RootTabScreenProps<"Coupons">) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity>
+        {/*@ts-ignore */}
+        <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
           <Ionicons name="arrow-back-outline" size={12} color="black" />
           <Text>Back</Text>
         </TouchableOpacity>

@@ -1,11 +1,11 @@
-import { StyleSheet } from "react-native";
-
+import { StyleSheet, Button } from "react-native";
 import { View } from "../components/Themed";
 import { SingleCoupon } from "../types";
 import { useState } from "react";
 import { CouponItemDetail } from "../components/coupons/CouponItemDetail";
 
-export default function CouponDetailScreen() {
+//@ts-ignore
+export function CouponDetailScreen({ navigation }) {
   const dummyData: SingleCoupon = {
     id: "1",
     title: "1 Free Coffee",
@@ -36,6 +36,10 @@ export default function CouponDetailScreen() {
         desc={dummyData.desc}
         validBefore={dummyData.validBefore}
         remaining={dummyData.remaining}
+      />
+      <Button
+        title="Go to Coupons page"
+        onPress={() => navigation.navigate("Coupons")}
       />
     </View>
   );
