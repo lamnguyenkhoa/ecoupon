@@ -19,7 +19,7 @@ exports.create = async (req, res) => {
     });
   }
 
-  // Create an event
+  // Create an user
   const user = new User({
     name: req.body.name,
     email: req.body.email,
@@ -27,7 +27,7 @@ exports.create = async (req, res) => {
     ownedCoupon: req.body.ownedCoupon || [],
   });
 
-  // Save this event to database
+  // Save this user to database
   user
     .save()
     .then(async (data) => {
@@ -46,8 +46,6 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = async (req, res) => {
-  var toReturn = {};
-  // ID
   const id = req.params.id;
   User.findOne({ _id: id })
     .then(async (data) => {
@@ -65,5 +63,41 @@ exports.findOne = async (req, res) => {
     .catch((err) => {
       console.log(err);
       res.status(500).send({ message: 'Error when accessing the database!' });
+    });
+};
+
+exports.delete = async (req, res) => {
+  utils.deleteData(User, req, res);
+};
+
+exports.update = async (req, res) => {
+  if (!req.body.name) {
+    return res.status(400).send({
+      message: 'Missing name!',
+    });
+  }
+  if (!req.body.email) {
+    return res.status(400).send({
+      message: 'Missing email!',
+    });
+  }
+  if (!req.body.password) {
+    return res.status(400).send({
+      message: 'Missing password!',
+    });
+  }
+
+  const id = req.params.id;
+  // Case of updated sucessfully
+  User.findByIdAndUpdate(id, { $set: req.body }, { new: true })
+    .then(async (updatedData) => {
+      res.status(200).send(updatedData);
+    })
+    // Case of error
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({
+        message: 'Error when updating Data!',
+      });
     });
 };
