@@ -11,6 +11,7 @@ import {
   ImageBackground,
 } from "react-native";
 import { Camera } from "expo-camera";
+import { Challenge } from "./Challenge";
 
 const { height, width } = Dimensions.get("window");
 const screenRatio = height / width;
@@ -69,6 +70,15 @@ export function ChallengeCamera() {
     setDesiredRatio(`${desiredRatio[0]}:${desiredRatio[1]}`);
   };
 
+  const snap = async () => {
+    if (cameraReady) {
+      // @ts-ignore 44147937
+      let photo = await cameraRef.current.takePictureAsync();
+      console.log(photo);
+      // shutterEffect();
+    }
+  }
+
   return (
     // @ts-ignore
     <Animated.View style={[styles.effectcontainer, { opacity: fadeAnim }]}>
@@ -83,38 +93,24 @@ export function ChallengeCamera() {
         }}
       >
 
-
         <View style={styles.carouselContainer}>
           {/* Carousel */}
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.carousel}>
+            {/* Padding, Android only accepts this not padding-top */}
             <View style={{ width: width / 2 - challengeSize / 2 }}></View>
-            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
-            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
-            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
-            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
-            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
-            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
-            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
-            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
-            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
-            <ImageBackground source={staticImage} imageStyle={imageStyle} style={styles.challenge}></ImageBackground>
+            <Challenge onPress={snap} challengeSize={challengeSize} center={center}></Challenge>
+            <View style={{ width: width * 0.1 }}></View>
+            <Challenge onPress={snap} challengeSize={challengeSize} center={center}></Challenge>
+            <View style={{ width: width * 0.1 }}></View>
+            <Challenge onPress={snap} challengeSize={challengeSize} center={center}></Challenge>
+            {/* Padding, Android only accepts this not padding-top */}
             <View style={{ width: width / 2 - challengeSize / 2 }}></View>
           </ScrollView>
         </View>
 
         <View style={styles.buttonContainer}>
-          {/* Snap button */}
-          <TouchableOpacity
-            style={styles.button}
-            onPress={async () => {
-              if (cameraReady) {
-                // @ts-ignore 44147937
-                let photo = await cameraRef.current.takePictureAsync();
-                console.log(photo);
-                // shutterEffect();
-              }
-            }}
-          ></TouchableOpacity>
+          {/* Snap button border */}
+          <View style={styles.button}></View>
         </View>
 
       </Camera>
@@ -125,11 +121,10 @@ export function ChallengeCamera() {
 const snapButtonSize = 120;
 const snapButtonBorderThickness = 15;
 const challengeSize = snapButtonSize - snapButtonBorderThickness * 2;
-const roundBorderRadius = Math.round((width + height) / 2)
-
-const imageStyle = {
-  borderRadius: roundBorderRadius,
-}
+const fromLeft = (width - snapButtonSize) / 2
+const paddingBottom = 20
+const fromTop = height - (snapButtonSize + paddingBottom)
+const center = [fromLeft, fromTop]
 
 const styles = StyleSheet.create({
   effectcontainer: {
@@ -146,11 +141,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   button: {
-    borderRadius: roundBorderRadius,
+    borderRadius: Math.round((width + height) / 2),
     width: snapButtonSize,
     height: snapButtonSize,
-    left: (width - snapButtonSize) / 2,
-    top: height - (snapButtonSize + 20),
+    left: fromLeft,
+    top: fromTop,
     borderWidth: snapButtonBorderThickness,
     borderColor: "white",
     backgroundColor: 'transparent'
@@ -158,11 +153,5 @@ const styles = StyleSheet.create({
   carousel: {
     alignSelf: "flex-end",
     marginBottom: 20 + snapButtonBorderThickness
-  },
-  challenge: {
-    width: challengeSize,
-    height: challengeSize,
-    borderColor: "red",
-    alignItems: "center",
   }
 });
