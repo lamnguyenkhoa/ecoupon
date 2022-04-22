@@ -2,16 +2,43 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const cors = require('cors');
+const passport = require('passport');
+const passportSetup = require('./config/passport-setup'); // we dont have to use it, but have to include it
+const cookieSession = require('cookie-session');
 
 const userRoute = require('./routes/user');
 const couponRoute = require('./routes/coupon');
 const challengeRoute = require('./routes/challenge');
+const authRoute = require('./routes/authenticate');
+
+app.use(function (req, res, next) {
+  console.log('handling request for: ' + req.url);
+  next();
+});
 
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(express.json());
+
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://localhost:3000',
+  })
+);
+
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000, // in millisecond
+    keys: ['cookie-secret-key-that-im-not-bother-to-hide'],
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || 'localhost';
@@ -21,13 +48,14 @@ const dbURI =
 app.use(userRoute);
 app.use(couponRoute);
 app.use(challengeRoute);
+app.use('/auth', authRoute);
 
 let server = app.listen(port, function () {
   console.log(`⚡Server is running on ${host}:${port}`);
 });
 
-app.get('/', function (req, res) {
-  res.send(`Hello! ⚡Server is running on ${host}:${port}`);
+app.get('/', (req, res) => {
+  console.log(`⚡Server is running on ${host}:${port}`);
 });
 
 initMongooseConnection(() => {

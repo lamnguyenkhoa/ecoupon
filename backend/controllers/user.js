@@ -1,14 +1,16 @@
 const utils = require('./utils');
 const User = require('../models/user');
 
+exports.profile = async (req, res) => {
+  res.send(req.user);
+};
+
 exports.create = async (req, res) => {
   // Create an user
   const user = new User({
     name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
+    googleId: req.body.googleId,
     ownedCoupon: req.body.ownedCoupon || [],
-    role: req.body.role,
   });
 
   // Save this user to database
