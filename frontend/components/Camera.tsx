@@ -18,7 +18,6 @@ export function ChallengeCamera() {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraReady, setCameraReady] = useState(false);
   const [desiredRatio, setDesiredRatio] = useState("16:9");
-  const [challengeSizeRatio, setChallengeSizeRatio] = useState(1);
   const cameraRef = useRef(null);
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
@@ -59,12 +58,15 @@ export function ChallengeCamera() {
     if (Platform.OS !== "android") return;
     // @ts-ignore
     const ratios = await cameraRef.current?.getSupportedRatiosAsync();
-    // @ts-ignore
-    let desiredRatio = ratios.map((r) => r.split(":")).reduce(([a, b], [c, d]) =>
-      Math.abs(a / b - screenRatio) < Math.abs(c / d - screenRatio)
-        ? [a, b]
-        : [c, d]
-    );
+    let desiredRatio = ratios
+      // @ts-ignore
+      .map((r) => r.split(":"))
+      // @ts-ignore
+      .reduce(([a, b], [c, d]) =>
+        Math.abs(a / b - screenRatio) < Math.abs(c / d - screenRatio)
+          ? [a, b]
+          : [c, d]
+      );
     setDesiredRatio(`${desiredRatio[0]}:${desiredRatio[1]}`);
   };
 
@@ -75,7 +77,7 @@ export function ChallengeCamera() {
       console.log(photo);
       // shutterEffect();
     }
-  }
+  };
 
   return (
     // @ts-ignore
@@ -90,22 +92,32 @@ export function ChallengeCamera() {
           setRatio();
         }}
       >
-
         <View style={styles.carouselContainer}>
           {/* Carousel */}
-          <ScrollView decelerationRate="fast" horizontal={true} showsHorizontalScrollIndicator={false} style={styles.carousel}
-            // scrollEventThrottle={8} onScroll={(event) => {
-            //   console.log('asdasd');
-            //   // setChallengeSizeRatio(0.5);
-            //   console.log(event.nativeEvent.contentOffset.x, event.nativeEvent.contentSize.width);
-            // }}
+          <ScrollView
+            decelerationRate="fast"
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            style={styles.carousel}
             snapToInterval={width / 3}
           >
             {/* Padding, Android only accepts this not padding-top */}
             <View style={{ width: width / 3 }}></View>
-            <Challenge onPress={snap} challengeSize={challengeSize} centerLeft={fromLeft + snapButtonBorderThickness}></Challenge>
-            <Challenge onPress={snap} challengeSize={challengeSize} centerLeft={fromLeft + snapButtonBorderThickness}></Challenge>
-            <Challenge onPress={snap} challengeSize={challengeSize} centerLeft={fromLeft + snapButtonBorderThickness}></Challenge>
+            <Challenge
+              onPress={snap}
+              challengeSize={challengeSize}
+              centerLeft={fromLeft + snapButtonBorderThickness}
+            ></Challenge>
+            <Challenge
+              onPress={snap}
+              challengeSize={challengeSize}
+              centerLeft={fromLeft + snapButtonBorderThickness}
+            ></Challenge>
+            <Challenge
+              onPress={snap}
+              challengeSize={challengeSize}
+              centerLeft={fromLeft + snapButtonBorderThickness}
+            ></Challenge>
             {/* Padding, Android only accepts this not padding-top */}
             <View style={{ width: width / 3 }}></View>
           </ScrollView>
@@ -115,7 +127,6 @@ export function ChallengeCamera() {
           {/* Snap button border */}
           <View style={styles.button}></View>
         </View>
-
       </Camera>
     </Animated.View>
   );
@@ -124,9 +135,9 @@ export function ChallengeCamera() {
 const snapButtonSize = 120;
 const snapButtonBorderThickness = 15;
 const challengeSize = snapButtonSize - snapButtonBorderThickness * 2;
-const fromLeft = (width - snapButtonSize) / 2
-const paddingBottom = 20
-const fromTop = height - (snapButtonSize + paddingBottom)
+const fromLeft = (width - snapButtonSize) / 2;
+const paddingBottom = 20;
+const fromTop = height - (snapButtonSize + paddingBottom);
 
 const styles = StyleSheet.create({
   effectcontainer: {
@@ -136,7 +147,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonContainer: {
-    position: 'absolute',
+    position: "absolute",
   },
   carouselContainer: {
     flex: 1,
@@ -150,10 +161,9 @@ const styles = StyleSheet.create({
     top: fromTop,
     borderWidth: snapButtonBorderThickness,
     borderColor: "white",
-    backgroundColor: 'blue'
   },
   carousel: {
     alignSelf: "flex-end",
-    marginBottom: 20 + snapButtonBorderThickness
-  }
+    marginBottom: 20 + snapButtonBorderThickness,
+  },
 });
