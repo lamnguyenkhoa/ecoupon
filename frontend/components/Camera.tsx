@@ -7,12 +7,42 @@ import {
   Dimensions,
   Platform,
   ScrollView,
+  ImageBackground,
 } from "react-native";
 import { Camera } from "expo-camera";
 import { Challenge } from "./Challenge";
 
 const { height, width } = Dimensions.get("window");
 const screenRatio = height / width;
+
+const vest = require("../assets/images/greenvest.jpg")
+const HnM = require("../assets/images/HnM.png")
+const shirt = require("../assets/images/shirt.png")
+
+const salad = require("../assets/images/greenfood.png")
+const coles = require("../assets/images/Coles.png")
+const vegetable = require("../assets/images/salad.jpg")
+
+const sticker = require("../assets/images/sticker.webp")
+const pepsi = require("../assets/images/pepsi.png")
+
+
+const challenges = [{
+  'icon': vest,
+  'brand': HnM,
+  'preview': shirt
+}, {
+  'icon': vegetable,
+  'brand': coles,
+  'preview': salad
+},
+{
+  'icon': pepsi,
+  'brand': pepsi,
+  'preview': sticker
+}
+]
+
 
 export function ChallengeCamera() {
   const [hasPermission, setHasPermission] = useState(null);
@@ -80,6 +110,25 @@ export function ChallengeCamera() {
     }
   };
 
+  let challengeObjs = [];
+  for (let [i, challenge] of challenges.entries()) {
+    console.log('debug ->', i)
+    challengeObjs.push(
+      <Challenge
+        key={i}
+        onPress={snap}
+        challengeSize={challengeSize}
+        centerLeft={fromLeft + snapButtonBorderThickness}
+        scroll={scroll}
+        icon={challenge.icon}
+        brand={challenge.brand}
+        preview={challenge.preview}
+      ></Challenge>
+    );
+    console.log(challengeObjs)
+  }
+
+
   return (
     // @ts-ignore
     <Animated.View style={[styles.effectcontainer, { opacity: fadeAnim }]}>
@@ -93,47 +142,30 @@ export function ChallengeCamera() {
           setRatio();
         }}
       >
-        <View style={styles.carouselContainer}>
-          {/* Carousel */}
-          <ScrollView
-            decelerationRate="fast"
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            style={styles.carousel}
-            snapToInterval={width / 3}
-            onScroll={(event) => {
-              setScroll(event.nativeEvent.contentOffset.x)
-            }}
-          >
-            {/* Padding, Android only accepts this not padding-top */}
-            <View style={{ width: width / 3 }}></View>
-            <Challenge
-              onPress={snap}
-              challengeSize={challengeSize}
-              centerLeft={fromLeft + snapButtonBorderThickness}
-              scroll={scroll}
-            ></Challenge>
-            <Challenge
-              onPress={snap}
-              challengeSize={challengeSize}
-              centerLeft={fromLeft + snapButtonBorderThickness}
-              scroll={scroll}
-            ></Challenge>
-            <Challenge
-              onPress={snap}
-              challengeSize={challengeSize}
-              centerLeft={fromLeft + snapButtonBorderThickness}
-              scroll={scroll}
-            ></Challenge>
-            {/* Padding, Android only accepts this not padding-top */}
-            <View style={{ width: width / 3 }}></View>
-          </ScrollView>
-        </View>
 
-        <View style={styles.buttonContainer}>
-          {/* Snap button border */}
-          <View style={styles.button}></View>
-        </View>
+        {/* Carousel */}
+        <ScrollView
+          decelerationRate="fast"
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          style={styles.carousel}
+          snapToInterval={width / 3}
+          onScroll={(event) => {
+            setScroll(event.nativeEvent.contentOffset.x);
+          }}
+          scrollEventThrottle={8}
+        >
+          {/* Padding, Android only accepts this not padding-top */}
+          <View style={{ width: width / 3 }}></View>
+
+          {challengeObjs}
+
+          {/* Padding, Android only accepts this not padding-top */}
+          <View style={{ width: width / 3 }}></View>
+        </ScrollView>
+
+        {/* Snap button border */}
+        <View style={styles.button}></View>
       </Camera>
     </Animated.View>
   );
@@ -152,13 +184,7 @@ const styles = StyleSheet.create({
   },
   camera: {
     flex: 1,
-  },
-  buttonContainer: {
-    position: "absolute",
-  },
-  carouselContainer: {
-    flex: 1,
-    flexDirection: "row",
+    flexDirection: 'row'
   },
   button: {
     borderRadius: Math.round((width + height) / 2),
@@ -168,9 +194,10 @@ const styles = StyleSheet.create({
     top: fromTop,
     borderWidth: snapButtonBorderThickness,
     borderColor: "white",
+    position: "absolute",
   },
   carousel: {
     alignSelf: "flex-end",
-    marginBottom: 20 + snapButtonBorderThickness,
+    marginBottom: 20 + snapButtonBorderThickness
   },
 });
