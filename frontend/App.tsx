@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, View, Text } from "react-native";
+import { Button, View, Text, Image, Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ChallengeCamera } from "./components/Camera";
@@ -12,6 +12,8 @@ import useColorScheme from "./hooks/useColorScheme";
 // Will be replaced by a proper Login page
 // @ts-ignore
 function HomeScreen({ navigation }) {
+  const imageWidth = Dimensions.get("window").width / 2;
+
   return (
     <View
       style={{
@@ -22,7 +24,12 @@ function HomeScreen({ navigation }) {
         gap: "10vh",
       }}
     >
-      <Text>ECOupon</Text>
+      <Image
+        resizeMode="contain"
+        source={require("./assets/images/title-logo.png")}
+        style={{ width: "75vw", height: "50vh" }}
+      ></Image>
+
       <Button
         title="Go to Camera"
         onPress={() => navigation.navigate("ChallengeCamera")}
