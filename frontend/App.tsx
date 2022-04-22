@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ChallengeCamera } from './components/Camera';
 
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
@@ -13,10 +14,11 @@ export default function App() {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
+      <ChallengeCamera></ChallengeCamera>
+      // <SafeAreaProvider>
+      //   <Navigation colorScheme={colorScheme} />
+      //   <StatusBar />
+      // </SafeAreaProvider>
     );
   }
 }

@@ -11,6 +11,7 @@ import { Camera } from "expo-camera";
 
 export function ChallengeCamera() {
   const [hasPermission, setHasPermission] = useState(null);
+  const [cameraReady, setCameraReady] = useState(false);
   const cameraRef = useRef(null);
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
@@ -20,13 +21,13 @@ export function ChallengeCamera() {
       Animated.timing(fadeAnim, {
         toValue: 0,
         duration: 150,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       // @ts-ignore
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 100,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
   };
@@ -49,27 +50,30 @@ export function ChallengeCamera() {
   return (
     // @ts-ignore
     <Animated.View style={[styles.effectcontainer, { opacity: fadeAnim }]}>
-      <Camera style={styles.camera} ref={cameraRef}>
+      <Camera style={styles.camera} type={Camera.Constants.Type.front} ref={cameraRef} onCameraReady={() => { setCameraReady(true) }} >
         {/* Snap button */}
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.button}
             onPress={async () => {
-              if (cameraRef.current) {
+
+              if (cameraReady) {
                 // @ts-ignore 44147937
                 let photo = await cameraRef.current.takePictureAsync();
                 console.log(photo);
-                shutterEffect();
+                // shutterEffect();
               }
+
             }}
           >
-            <Text style={styles.text}> Snap </Text>
           </TouchableOpacity>
         </View>
       </Camera>
     </Animated.View>
   );
 }
+
+const snapButtonRadius = 120
 
 const styles = StyleSheet.create({
   effectcontainer: {
@@ -89,16 +93,11 @@ const styles = StyleSheet.create({
       Math.round(
         Dimensions.get("window").width + Dimensions.get("window").height
       ) / 2,
-    width: 120,
-    height: 120,
-    backgroundColor: "#f00",
+    width: snapButtonRadius,
+    height: snapButtonRadius,
     alignSelf: "flex-end",
-    justifyContent: "center",
-    alignItems: "center",
-    left: Dimensions.get("window").width / 2 - 60,
-  },
-  text: {
-    fontSize: 18,
-    color: "white",
-  },
+    left: (Dimensions.get("window").width - snapButtonRadius) / 2,
+    borderWidth: 15,
+    borderColor: 'white'
+  }
 });
