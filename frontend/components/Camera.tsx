@@ -6,12 +6,17 @@ import {
   TouchableOpacity,
   Animated,
   Dimensions,
+  Platform,
 } from "react-native";
 import { Camera } from "expo-camera";
+
+const { height, width } = Dimensions.get("window");
+const screenRatio = height / width;
 
 export function ChallengeCamera() {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraReady, setCameraReady] = useState(false);
+  const [desiredRatio, setDesiredRatio] = useState("16:9");
   const cameraRef = useRef(null);
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
@@ -47,40 +52,60 @@ export function ChallengeCamera() {
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
+
+  const setRatio = async () => {
+    if (Platform.OS !== "android") return;
+    // @ts-ignore
+    const ratios = await cameraRef.current?.getSupportedRatiosAsync();
+    // @ts-ignore
+    let desiredRatio = ratios.map((r) => r.split(":")).reduce(([a, b], [c, d]) =>
+      Math.abs(a / b - screenRatio) < Math.abs(c / d - screenRatio)
+        ? [a, b]
+        : [c, d]
+    );
+    setDesiredRatio(`${desiredRatio[0]}:${desiredRatio[1]}`);
+  };
+
   return (
     // @ts-ignore
     <Animated.View style={[styles.effectcontainer, { opacity: fadeAnim }]}>
-      <Camera style={styles.camera} type={Camera.Constants.Type.front} ref={cameraRef} onCameraReady={() => { setCameraReady(true) }} >
+      <Camera
+        style={styles.camera}
+        ratio={desiredRatio}
+        type={Camera.Constants.Type.front}
+        ref={cameraRef}
+        onCameraReady={() => {
+          setCameraReady(true);
+          setRatio();
+        }}
+      >
         {/* Snap button */}
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.button}
             onPress={async () => {
-
               if (cameraReady) {
                 // @ts-ignore 44147937
                 let photo = await cameraRef.current.takePictureAsync();
                 console.log(photo);
                 // shutterEffect();
               }
-
             }}
-          >
-          </TouchableOpacity>
+          ></TouchableOpacity>
         </View>
       </Camera>
     </Animated.View>
   );
 }
 
-const snapButtonRadius = 120
+const snapButtonRadius = 120;
 
 const styles = StyleSheet.create({
   effectcontainer: {
     flex: 1,
   },
   camera: {
-    flex: 1,
+    flex: 1.2,
   },
   buttonContainer: {
     flex: 1,
@@ -89,15 +114,12 @@ const styles = StyleSheet.create({
   },
   button: {
     marginBottom: 20,
-    borderRadius:
-      Math.round(
-        Dimensions.get("window").width + Dimensions.get("window").height
-      ) / 2,
+    borderRadius: Math.round(width + height) / 2,
     width: snapButtonRadius,
     height: snapButtonRadius,
     alignSelf: "flex-end",
-    left: (Dimensions.get("window").width - snapButtonRadius) / 2,
+    left: (width - snapButtonRadius) / 2,
     borderWidth: 15,
-    borderColor: 'white'
-  }
+    borderColor: "white",
+  },
 });
