@@ -79,10 +79,9 @@ export function Challenge(props) {
                         fontWeight: "bold",
                         color: "#E00026",
                         fontFamily: "serif",
-                        marginRight: 5,
                     }}
                 >
-                    {"15%"}
+                    {`${props.percentage}%`}
                 </Text>
             </View>
 

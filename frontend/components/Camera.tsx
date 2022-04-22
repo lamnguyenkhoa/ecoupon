@@ -30,16 +30,19 @@ const pepsi = require("../assets/images/pepsi.png")
 const challenges = [{
   'icon': vest,
   'brand': HnM,
-  'preview': shirt
+  'preview': shirt,
+  'percentage': 15
 }, {
   'icon': vegetable,
   'brand': coles,
-  'preview': salad
+  'preview': salad,
+  'percentage': 2
 },
 {
   'icon': pepsi,
   'brand': pepsi,
-  'preview': sticker
+  'preview': sticker,
+  'percentage': 5
 }
 ]
 
@@ -123,6 +126,7 @@ export function ChallengeCamera() {
         icon={challenge.icon}
         brand={challenge.brand}
         preview={challenge.preview}
+        percentage={challenge.percentage}
       ></Challenge>
     );
     console.log(challengeObjs)
