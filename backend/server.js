@@ -4,6 +4,8 @@ const app = express();
 const mongoose = require('mongoose');
 
 const userRoute = require('./routes/user');
+const couponRoute = require('./routes/coupon');
+const challengeRoute = require('./routes/challenge');
 
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }));
@@ -17,6 +19,8 @@ const dbURI =
   'mongodb+srv://admin:admin@cluster0.6sjzi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 app.use(userRoute);
+app.use(couponRoute);
+app.use(challengeRoute);
 
 let server = app.listen(port, function () {
   console.log(`⚡Server is running on ${host}:${port}`);

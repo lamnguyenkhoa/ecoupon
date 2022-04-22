@@ -40,6 +40,29 @@ function deleteData(controller, req, res) {
     });
 }
 
+// Retrieve and return one object from the database =================================
+function findOneData(controller, req, res) {
+  const id = req.params.id;
+  controller
+    .findOne({ _id: id })
+    .then((data) => {
+      // If data with this id is not found
+      if (!data) {
+        // return the error messages
+        return res.status(404).send({
+          message: 'No user is found with this id!',
+        });
+      }
+      // else, store this data to toReturn
+      res.status(200).send(data);
+    })
+    // Catching error when accessing the database
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({ message: err.message });
+    });
+}
+
 // Retrieve and return all data from the database =================================
 function findAllData(controller, req, res) {
   // Return all data using find()
@@ -51,7 +74,7 @@ function findAllData(controller, req, res) {
     // Catching error when accessing the database
     .catch((err) => {
       console.log(err);
-      res.status(500).send({ message: 'Error when accessing the database!' });
+      res.status(500).send({ message: err.message });
     });
 }
 
@@ -59,4 +82,5 @@ module.exports = {
   updateData,
   deleteData,
   findAllData,
+  findOneData,
 };
