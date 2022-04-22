@@ -25,6 +25,7 @@ exports.create = async (req, res) => {
     email: req.body.email,
     password: req.body.password,
     ownedCoupon: req.body.ownedCoupon || [],
+    role: req.body.role,
   });
 
   // Save this user to database
@@ -36,7 +37,7 @@ exports.create = async (req, res) => {
     .catch((err) => {
       console.log(err);
       res.status(500).send({
-        message: 'Error when creating user!',
+        message: err.message,
       });
     });
 };
@@ -71,33 +72,5 @@ exports.delete = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  if (!req.body.name) {
-    return res.status(400).send({
-      message: 'Missing name!',
-    });
-  }
-  if (!req.body.email) {
-    return res.status(400).send({
-      message: 'Missing email!',
-    });
-  }
-  if (!req.body.password) {
-    return res.status(400).send({
-      message: 'Missing password!',
-    });
-  }
-
-  const id = req.params.id;
-  // Case of updated sucessfully
-  User.findByIdAndUpdate(id, { $set: req.body }, { new: true })
-    .then(async (updatedData) => {
-      res.status(200).send(updatedData);
-    })
-    // Case of error
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send({
-        message: 'Error when updating Data!',
-      });
-    });
+  utils.updateData(User, req, res);
 };

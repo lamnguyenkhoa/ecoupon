@@ -5,7 +5,7 @@ function updateData(controller, req, res) {
 
   // Case of updated sucessfully
   controller
-    .findByIdAndUpdate(id, { $set: req.body }, { new: true })
+    .findOneAndUpdate({ _id: id }, req.body, { new: true, runValidators: true })
     .then((updatedData) => {
       res.status(200).send(updatedData);
     })
@@ -13,7 +13,7 @@ function updateData(controller, req, res) {
     .catch((err) => {
       console.log(err);
       res.status(500).send({
-        message: 'Error when updating Data!',
+        message: err.message,
       });
     });
 }
