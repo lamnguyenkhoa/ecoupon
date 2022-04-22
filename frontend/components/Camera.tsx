@@ -102,12 +102,12 @@ export function ChallengeCamera() {
             snapToInterval={width / 3}
           >
             {/* Padding, Android only accepts this not padding-top */}
-            <View style={{ width: width / 2 - challengeSize / 2 - (width / 6 - challengeSize / 2) }}></View>
-            <Challenge onPress={snap} challengeSize={challengeSize} centerLeft={fromLeft}></Challenge>
-            <Challenge onPress={snap} challengeSize={challengeSize} centerLeft={fromLeft}></Challenge>
-            <Challenge onPress={snap} challengeSize={challengeSize} centerLeft={fromLeft}></Challenge>
+            <View style={{ width: width / 3 }}></View>
+            <Challenge onPress={snap} challengeSize={challengeSize} centerLeft={fromLeft + snapButtonBorderThickness}></Challenge>
+            <Challenge onPress={snap} challengeSize={challengeSize} centerLeft={fromLeft + snapButtonBorderThickness}></Challenge>
+            <Challenge onPress={snap} challengeSize={challengeSize} centerLeft={fromLeft + snapButtonBorderThickness}></Challenge>
             {/* Padding, Android only accepts this not padding-top */}
-            <View style={{ width: width / 2 - challengeSize / 2 - (width / 6 - challengeSize / 2) }}></View>
+            <View style={{ width: width / 3 }}></View>
           </ScrollView>
         </View>
 
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     top: fromTop,
     borderWidth: snapButtonBorderThickness,
     borderColor: "white",
-    backgroundColor: 'transparent'
+    backgroundColor: 'blue'
   },
   carousel: {
     alignSelf: "flex-end",
