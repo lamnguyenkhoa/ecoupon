@@ -1,8 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+
+const userRoute = require("./routes/user");
 
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }));
@@ -14,6 +15,8 @@ const port = process.env.PORT || 3000;
 const host = process.env.HOST || "localhost";
 const dbURI =
   "mongodb+srv://admin:admin@cluster0.6sjzi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+
+app.use(userRoute);
 
 let server = app.listen(port, function () {
   console.log(`⚡Server is running on ${host}:${port}`);
