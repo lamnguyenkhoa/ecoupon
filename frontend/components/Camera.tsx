@@ -18,6 +18,7 @@ export function ChallengeCamera() {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraReady, setCameraReady] = useState(false);
   const [desiredRatio, setDesiredRatio] = useState("16:9");
+  const [scroll, setScroll] = useState(0);
   const cameraRef = useRef(null);
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
@@ -100,6 +101,9 @@ export function ChallengeCamera() {
             showsHorizontalScrollIndicator={false}
             style={styles.carousel}
             snapToInterval={width / 3}
+            onScroll={(event) => {
+              setScroll(event.nativeEvent.contentOffset.x)
+            }}
           >
             {/* Padding, Android only accepts this not padding-top */}
             <View style={{ width: width / 3 }}></View>
@@ -107,16 +111,19 @@ export function ChallengeCamera() {
               onPress={snap}
               challengeSize={challengeSize}
               centerLeft={fromLeft + snapButtonBorderThickness}
+              scroll={scroll}
             ></Challenge>
             <Challenge
               onPress={snap}
               challengeSize={challengeSize}
               centerLeft={fromLeft + snapButtonBorderThickness}
+              scroll={scroll}
             ></Challenge>
             <Challenge
               onPress={snap}
               challengeSize={challengeSize}
               centerLeft={fromLeft + snapButtonBorderThickness}
+              scroll={scroll}
             ></Challenge>
             {/* Padding, Android only accepts this not padding-top */}
             <View style={{ width: width / 3 }}></View>
@@ -133,7 +140,7 @@ export function ChallengeCamera() {
 }
 
 const snapButtonSize = 120;
-const snapButtonBorderThickness = 15;
+const snapButtonBorderThickness = 10;
 const challengeSize = snapButtonSize - snapButtonBorderThickness * 2;
 const fromLeft = (width - snapButtonSize) / 2;
 const paddingBottom = 20;
