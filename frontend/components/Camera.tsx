@@ -15,37 +15,37 @@ import { Challenge } from "./Challenge";
 const { height, width } = Dimensions.get("window");
 const screenRatio = height / width;
 
-const vest = require("../assets/images/greenvest.jpg")
-const HnM = require("../assets/images/HnM.png")
-const shirt = require("../assets/images/shirt.png")
+const vest = require("../assets/images/greenvest.jpg");
+const HnM = require("../assets/images/HnM.png");
+const shirt = require("../assets/images/shirt.png");
 
-const salad = require("../assets/images/greenfood.png")
-const coles = require("../assets/images/Coles.png")
-const vegetable = require("../assets/images/salad.jpg")
+const salad = require("../assets/images/greenfood.png");
+const coles = require("../assets/images/Coles.png");
+const vegetable = require("../assets/images/salad.jpg");
 
-const sticker = require("../assets/images/sticker.webp")
-const pepsi = require("../assets/images/pepsi.png")
+const sticker = require("../assets/images/sticker.webp");
+const pepsi = require("../assets/images/pepsi.png");
 
-
-const challenges = [{
-  'icon': vest,
-  'brand': HnM,
-  'preview': shirt,
-  'percentage': 15
-}, {
-  'icon': vegetable,
-  'brand': coles,
-  'preview': salad,
-  'percentage': 2
-},
-{
-  'icon': pepsi,
-  'brand': pepsi,
-  'preview': sticker,
-  'percentage': 5
-}
-]
-
+const challenges = [
+  {
+    icon: vest,
+    brand: HnM,
+    preview: shirt,
+    percentage: 15,
+  },
+  {
+    icon: vegetable,
+    brand: coles,
+    preview: salad,
+    percentage: 2,
+  },
+  {
+    icon: pepsi,
+    brand: pepsi,
+    preview: sticker,
+    percentage: 5,
+  },
+];
 
 export function ChallengeCamera() {
   const [hasPermission, setHasPermission] = useState(null);
@@ -115,7 +115,7 @@ export function ChallengeCamera() {
 
   let challengeObjs = [];
   for (let [i, challenge] of challenges.entries()) {
-    console.log('debug ->', i)
+    console.log("debug ->", i);
     challengeObjs.push(
       <Challenge
         key={i}
@@ -129,9 +129,8 @@ export function ChallengeCamera() {
         percentage={challenge.percentage}
       ></Challenge>
     );
-    console.log(challengeObjs)
+    console.log(challengeObjs);
   }
-
 
   return (
     // @ts-ignore
@@ -146,7 +145,6 @@ export function ChallengeCamera() {
           setRatio();
         }}
       >
-
         {/* Carousel */}
         <ScrollView
           decelerationRate="fast"
@@ -169,7 +167,7 @@ export function ChallengeCamera() {
         </ScrollView>
 
         {/* Snap button border */}
-        <View style={styles.button}></View>
+        <View pointerEvents="none" style={styles.button}></View>
       </Camera>
     </Animated.View>
   );
@@ -188,7 +186,7 @@ const styles = StyleSheet.create({
   },
   camera: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: "row",
   },
   button: {
     borderRadius: Math.round((width + height) / 2),
@@ -202,6 +200,6 @@ const styles = StyleSheet.create({
   },
   carousel: {
     alignSelf: "flex-end",
-    marginBottom: 20 + snapButtonBorderThickness
+    marginBottom: 20 + snapButtonBorderThickness,
   },
 });
