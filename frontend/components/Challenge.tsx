@@ -44,7 +44,7 @@ export function Challenge(props) {
                 <ImageBackground
                     source={props.preview}
                     imageStyle={{
-                        resizeMode: 'center'
+                        resizeMode: "center",
                     }}
                     style={{ width: width, height: 500 }}
                 ></ImageBackground>
