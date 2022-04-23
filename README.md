@@ -1,6 +1,6 @@
 # Ecoupon
 
-![img](img/logo-name.png "App logo")
+![img](img/logo.png "App logo")
 
 A mobile app that provides fun challenges to educate users how to live a healther lifestyle and protect our planet.
 
