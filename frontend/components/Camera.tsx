@@ -10,6 +10,7 @@ import {
   Modal,
   Pressable,
   TouchableOpacity,
+  ImageBackground
 } from "react-native";
 import { Camera } from "expo-camera";
 import { Challenge } from "./Challenge";
@@ -23,32 +24,33 @@ const HnM = require("../assets/images/HnM.png");
 const shirt = require("../assets/images/shirt.png");
 
 const salad = require("../assets/images/greenfood.png");
-const coles = require("../assets/images/Coles.png");
+const kfc = require("../assets/images/kfc-logo.png");
 const vegetable = require("../assets/images/salad.jpg");
 
 const sticker = require("../assets/images/sticker.webp");
 const pepsi = require("../assets/images/pepsi.png");
 
-const challenges = [
-  {
-    icon: vest,
-    brand: HnM,
-    preview: shirt,
-    percentage: "15%",
-  },
-  {
-    icon: vegetable,
-    brand: coles,
-    preview: salad,
-    percentage: "2%",
-  },
-  {
-    icon: pepsi,
-    brand: pepsi,
-    preview: sticker,
-    percentage: "🌳",
-  },
-];
+const coupon = require("../assets/images/coupon.png");
+const confetti = require("../assets/images/confetti.gif");
+
+const challenges = [{
+  'icon': vest,
+  'brand': HnM,
+  'preview': shirt,
+  'percentage': '15%'
+}, {
+  'icon': vegetable,
+  'brand': kfc,
+  'preview': salad,
+  'percentage': '25%'
+},
+{
+  'icon': pepsi,
+  'brand': pepsi,
+  'preview': sticker,
+  'percentage': '🌳'
+}
+]
 
 // @ts-ignore
 export function ChallengeCamera({ navigation }) {
@@ -118,9 +120,14 @@ export function ChallengeCamera({ navigation }) {
     }
 
     // Check if snap is valid
-    let challengeDone = true;
+    let challengeDone = true
     if (challengeDone) {
+      // @ts-ignore
+      cameraRef.current?.pausePreview()
+      setModalVisible(true)
     }
+
+
   };
 
   let challengeObjs = [];
@@ -143,6 +150,45 @@ export function ChallengeCamera({ navigation }) {
   return (
     // @ts-ignore
     <Animated.View style={[styles.effectcontainer, { opacity: fadeAnim }]}>
+      <Modal
+        animationType='slide'
+        transparent={true}
+        visible={modalVisible}
+      >
+
+
+        <View style={styles.centeredView}>
+
+
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>You got a coupon! 🎉</Text>
+
+            <ImageBackground
+              source={coupon}
+              imageStyle={{
+                resizeMode: 'center'
+              }}
+              style={{ width: width * 0.95, height: 220 }}
+            ></ImageBackground>
+
+            <Pressable
+              style={[styles.modalButton, styles.buttonClose]}
+              onPress={() => {
+                setModalVisible(false)
+                // @ts-ignore
+                cameraRef.current?.resumePreview()
+              }}
+            >
+              <Text style={styles.textStyle}>x</Text>
+            </Pressable>
+          </View>
+          <ImageBackground
+            source={confetti}
+            style={{ width: width, height: height * 0.2 }}
+          ></ImageBackground>
+        </View>
+      </Modal>
+
       <Camera
         style={styles.camera}
         ratio={desiredRatio}
@@ -153,27 +199,6 @@ export function ChallengeCamera({ navigation }) {
           setRatio();
         }}
       >
-        {/* <Modal
-          animationType='slide'
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(!modalVisible);
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>You got a coupon!</Text>
-              <Pressable
-                style={[styles.modalButton, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}
-              >
-                <Text style={styles.textStyle}>Hide Modal</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Modal> */}
-
         {/* Carousel */}
         <ScrollView
           decelerationRate="fast"
@@ -205,18 +230,17 @@ export function ChallengeCamera({ navigation }) {
           style={{
             position: "absolute",
             left: "5%",
-            top: "5%",
-            padding: 10,
+            top: "10%",
             backgroundColor: "#fff",
             borderRadius: 50,
+            height: 35,
+            width: 35,
             flex: 1,
-            flexDirection: "row",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
           <Ionicons name="arrow-back-outline" size={20} color="black" />
-          <Text style={{ fontWeight: "bold" }}>Coupon</Text>
         </TouchableOpacity>
       </Camera>
     </Animated.View>
@@ -256,41 +280,44 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    marginTop: 22
   },
   modalView: {
-    margin: 20,
+    marginBottom: 30,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 5,
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
+    elevation: 5
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "black",
   },
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center",
+    textAlign: "center"
   },
   modalText: {
-    marginBottom: 15,
-    textAlign: "center",
+    marginTop: 20,
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: "#E00026",
+    fontFamily: "serif"
   },
   modalButton: {
-    borderRadius: 20,
-    padding: 10,
+    marginBottom: 20,
+    borderRadius: Math.round((width + height) / 2),
+    width: 35,
+    height: 35,
     elevation: 2,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
