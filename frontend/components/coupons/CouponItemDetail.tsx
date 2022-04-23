@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   coImg: {
-    height: 26,
+    height: 46,
     width: 82,
   },
   content: {
@@ -129,7 +129,9 @@ export function CouponItemDetail(props: SingleCoupon) {
           <View style={styles.contentArea}>
             <View style={styles.info}>
               <Image
-                source={require("../../assets/images/kfc-logo.png")}
+                source={{
+                  uri: props.logo,
+                }}
                 style={styles.coImg}
               />
               <View style={styles.content}>

@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   coImg: {
-    height: 35,
-    width: 35,
+    height: 45,
+    width: 45,
   },
   content: {},
   couponTitle: {
@@ -96,7 +96,9 @@ export function CouponItem(props: SingleCoupon) {
           <View style={styles.right}></View>
           <View style={styles.imgBox}>
             <Image
-              source={require("../../assets/images/starbucks-logo.png")}
+              source={{
+                uri: props.logo,
+              }}
               style={styles.coImg}
             />
           </View>
