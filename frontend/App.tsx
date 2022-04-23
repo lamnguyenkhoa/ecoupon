@@ -24,20 +24,20 @@ function HomeScreen({ navigation }) {
         gap: "10vh",
       }}
     >
-      <Image
+      {/* <Image
         resizeMode="contain"
         source={require("./assets/images/title-logo.png")}
         style={{ width: "75vw", height: "50vh" }}
-      ></Image>
+      ></Image> */}
 
       <Button
-        title="Go to Camera"
+        title="Face new challenges ⭐"
         onPress={() => navigation.navigate("ChallengeCamera")}
       />
-      {/* <Button
-        title="Go to Coupons page"
+      <Button
+        title="See your coupons"
         onPress={() => navigation.navigate("Coupons")}
-      /> */}
+      />
     </View>
   );
 }
@@ -59,10 +59,10 @@ export default function App() {
             headerShown: false,
           }}
         >
-          {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="ChallengeCamera" component={ChallengeCamera} />
-          {/* <Stack.Screen name="Coupons" component={Coupons} />
-          <Stack.Screen name="CouponDetail" component={CouponDetailScreen} /> */}
+          <Stack.Screen name="Coupons" component={Coupons} />
+          <Stack.Screen name="CouponDetail" component={CouponDetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     );

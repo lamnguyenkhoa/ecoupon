@@ -13,44 +13,46 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: "1rem",
-    marginTop: "1rem",
+    marginBottom: 12,
+    marginTop: 12,
   },
   card: {
-    width: "340px",
-    height: "530px",
+    width: 340,
+    height: 530,
     borderRadius: 8,
-    boxShadow: "0 4px 6px 0 rgba(0, 0, 0, 0.2)",
+    // boxShadow: "0 4px 6px 0 rgba(0, 0, 0, 0.2)",
     backgroundColor: "#ffffff",
-    padding: "10px 10px",
+    paddingTop: 10,
+    paddingRight: 10,
     position: "relative",
   },
   left: {
     position: "absolute",
-    content: `''`,
+    // content: `''`,
     height: 32,
-    left: "-20px",
+    left: -20,
     borderRadius: 32,
     zIndex: 1,
-    bottom: "200px",
+    bottom: 200,
     backgroundColor: "#fff",
     width: 32,
     flexDirection: "row",
   },
   right: {
     position: "absolute",
-    content: `''`,
+    // content: `''`,
     height: 32,
-    right: "-20px",
+    right: -20,
     borderRadius: 32,
     zIndex: 1,
-    bottom: "200px",
+    bottom: 200,
     backgroundColor: "#fff",
     width: 32,
     flexDirection: "row",
   },
   main: {
-    padding: "0 10px",
+    paddingTop: 0,
+    paddingRight: 10,
     alignItems: "center",
     height: "100%",
     backgroundColor: "#FBFBFB",
@@ -61,7 +63,7 @@ const styles = StyleSheet.create({
     // borderRightWidth: 2,
     // borderStyle: "dashed",
     backgroundColor: "#FBFBFB",
-    marginTop: "2rem",
+    marginTop: 24,
     width: "100%",
     justifyContent: "space-around",
   },
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
   couponComp: {
     fontSize: 12,
     backgroundColor: "#FBFBFB",
-    marginTop: "1rem",
+    marginTop: 12,
   },
   couponValid: {
     fontSize: 8,
@@ -89,7 +91,7 @@ const styles = StyleSheet.create({
   },
   desc: {
     backgroundColor: "#FBFBFB",
-    margin: "2rem",
+    margin: 24,
   },
   contentArea: {
     backgroundColor: "#FBFBFB",
@@ -100,20 +102,20 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   qrCodeArea: {
-    marginTop: "2rem",
-    marginBottom: "2rem",
+    marginTop: 24,
+    marginBottom: 24,
     backgroundColor: "#FBFBFB",
     width: "100%",
     alignItems: "center",
   },
   actionArea: {
-    marginTop: "1.5rem",
+    marginTop: 18,
     width: "100%",
     backgroundColor: "#FBFBFB",
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingLeft: "1rem",
-    paddingRight: "1rem",
+    paddingLeft: 12,
+    paddingRight: 12,
     alignItems: "center",
   },
 });
@@ -136,7 +138,7 @@ export function CouponItemDetail(props: SingleCoupon) {
               </View>
             </View>
             <View style={styles.desc}>
-              <p>{props.desc}</p>
+              <Text>{props.desc}</Text>
             </View>
           </View>
           <View style={styles.qrCodeArea}>
@@ -147,7 +149,7 @@ export function CouponItemDetail(props: SingleCoupon) {
               </TouchableOpacity>
               <Text style={styles.couponValid}>{props.validBefore}</Text>
               <TouchableOpacity>
-                <Ionicons name="info" size={24} color="#004165" />
+                <Ionicons name='analytics' size={24} color="#004165" />
               </TouchableOpacity>
             </View>
           </View>
