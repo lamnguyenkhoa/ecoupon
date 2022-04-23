@@ -23,13 +23,14 @@ const styles = StyleSheet.create({
   header: {
     position: "relative",
     height: 170,
+    marginTop: 20
   },
   backNav: {
     position: "absolute",
     left: 0,
-    marginTop: 10,
+    marginTop: 20,
     marginLeft: 10,
-    flexDirection: "row",
+    flexDirection: "row"
   },
   name: {
     position: "absolute",
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: "center",
     top: 0,
-    left: 0,
+    left: 120,
     right: 0,
     bottom: 0,
     margin: "auto",
@@ -54,9 +55,11 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   trees: {
+    marginTop: 30,
+    marginRight: 20,
     flexDirection: "row",
     fontSize: 20,
-    marginBottom: 56,
+    marginBottom: 30,
   },
   treeLogo: {
     height: 63,
@@ -130,16 +133,16 @@ export function Coupons({ navigation }: RootTabScreenProps<"Coupons">) {
     <View style={styles.container}>
       <View style={styles.header}>
         {/*@ts-ignore */}
-        <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
-          <Ionicons name="arrow-back-outline" size={12} color="black" />
-          <Text>Back</Text>
+        <TouchableOpacity style={styles.backNav} onPress={() => navigation.navigate("HomeScreen")}>
+          <Ionicons name="arrow-back-outline" size={20} color="black" />
+          <Text style={{ fontWeight: 'bold' }}>Back</Text>
         </TouchableOpacity>
         <View style={styles.name}>
           <Image
             source={require("../assets/images/avatar-face.png")}
             style={styles.avatar}
           ></Image>
-          <Text style={{ fontSize: 16 }}>Kevie</Text>
+          <Text style={{ fontSize: 16, fontWeight: 'bold', paddingLeft: 50 }}>Kevie</Text>
         </View>
         <View style={styles.rightBulkArea}>
           <View style={styles.trees}>
@@ -147,10 +150,10 @@ export function Coupons({ navigation }: RootTabScreenProps<"Coupons">) {
               source={require("../assets/images/tree.png")}
               style={styles.treeLogo}
             ></Image>
-            <Text style={{ fontSize: 20, paddingTop: 14 }}>12</Text>
+            <Text style={{ fontSize: 20, paddingTop: 14 }}>x12</Text>
           </View>
           <TouchableOpacity>
-            <Text style={{ fontSize: 12 }}>Account Setting</Text>
+            <Text style={{ borderRadius: 20, paddingBottom: 2, textAlign: 'center', color: 'white', fontSize: 12, fontWeight: 'bold', backgroundColor: 'black' }}>Account Setting</Text>
           </TouchableOpacity>
         </View>
       </View>
