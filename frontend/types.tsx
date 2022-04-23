@@ -22,6 +22,7 @@ export type RootStackParamList = {
   NotFound: undefined;
   CouponDetail: undefined;
   CouponList: undefined;
+  Business: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

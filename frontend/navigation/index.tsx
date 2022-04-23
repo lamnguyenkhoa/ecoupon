@@ -15,10 +15,10 @@ import * as React from "react";
 import { ColorSchemeName, Pressable } from "react-native";
 
 import NotFoundScreen from "../screens/NotFoundScreen";
-import CouponDetailScreen from "../screens/CouponDetailScreen";
+import { CouponDetailScreen } from "../screens/CouponDetailScreen";
 import { Coupons } from "../screens/Coupons";
 import { ChallengeCamera } from "../components/Camera";
-
+import { BChallenge } from "../screens/BusinessChallengeTemplate";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -68,6 +68,11 @@ function RootNavigator() {
       <Stack.Screen
         name="CouponList"
         component={Coupons}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Business"
+        component={BChallenge}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
