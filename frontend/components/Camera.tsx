@@ -61,7 +61,7 @@ export function ChallengeCamera({ navigation }) {
   const [desiredRatio, setDesiredRatio] = useState("16:9");
   const [scroll, setScroll] = useState(0);
   const cameraRef = useRef(null);
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
   const shutterEffect = () => {
