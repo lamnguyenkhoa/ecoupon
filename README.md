@@ -21,3 +21,4 @@ Run `expo start` in `frontend` folder
 ![img](img/3.png "App logo")
 
 ## Video
+[Demo](https://youtu.be/gbwyBAT0yoc)
