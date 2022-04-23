@@ -4,6 +4,8 @@
 
 A mobile app that provides fun challenges to educate users how to live a healther lifestyle and protect our planet.
 
+[Devpost](https://devpost.com/software/ecoupon?ref_content=my-projects-tab&ref_feature=my_projects)
+
 ## How to install
 
 Run `npm install` in `frontend` folder and `backend` folder
