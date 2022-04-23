@@ -209,7 +209,7 @@ export function ChallengeCamera({ navigation }) {
             left: "5%",
             top: "10%",
             backgroundColor: "#fff",
-            borderRadius: "50%",
+            borderRadius: 50,
             height: 35,
             width: 35,
             flex: 1,

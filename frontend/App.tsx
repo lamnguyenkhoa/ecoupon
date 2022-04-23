@@ -34,10 +34,10 @@ function HomeScreen({ navigation }) {
         title="Go to Camera"
         onPress={() => navigation.navigate("ChallengeCamera")}
       />
-      <Button
+      {/* <Button
         title="Go to Coupons page"
         onPress={() => navigation.navigate("Coupons")}
-      />
+      /> */}
     </View>
   );
 }
@@ -59,10 +59,10 @@ export default function App() {
             headerShown: false,
           }}
         >
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
           <Stack.Screen name="ChallengeCamera" component={ChallengeCamera} />
-          <Stack.Screen name="Coupons" component={Coupons} />
-          <Stack.Screen name="CouponDetail" component={CouponDetailScreen} />
+          {/* <Stack.Screen name="Coupons" component={Coupons} />
+          <Stack.Screen name="CouponDetail" component={CouponDetailScreen} /> */}
         </Stack.Navigator>
       </NavigationContainer>
     );
