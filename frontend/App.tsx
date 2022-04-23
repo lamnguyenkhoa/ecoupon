@@ -62,7 +62,7 @@ export default function App() {
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="ChallengeCamera" component={ChallengeCamera} />
           <Stack.Screen name="Coupons" component={Coupons} />
-          {/* <Stack.Screen name="CouponDetail" component={CouponDetailScreen} /> */}
+          <Stack.Screen name="CouponDetail" component={CouponDetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     );
