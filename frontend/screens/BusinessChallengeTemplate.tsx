@@ -21,7 +21,7 @@ export function BChallenge() {
       <Text style={styles.title}>Setup Challenges</Text>
       <View style={styles.pickArea}>
         <Text style={styles.text}>Select Category</Text>
-        <Picker>
+        <Picker style={{ paddingLeft: 200 }}>
           <Picker.Item label="Food & Diet" value="fd" />
           <Picker.Item label="Carbon footprint" value="cf" />
           <Picker.Item label="Martiral" value="ml" />
@@ -29,7 +29,7 @@ export function BChallenge() {
       </View>
       <View style={styles.pickArea}>
         <Text style={styles.text}>Select Challenge</Text>
-        <Picker>
+        <Picker style={{ paddingLeft: 200 }}>
           <Picker.Item label="Green Food" value="fd" />
           <Picker.Item label="No motor vehicle" value="cf" />
           <Picker.Item label="Bring your own bag" value="ml" />
@@ -84,7 +84,7 @@ export function BChallenge() {
         />
       </View>
 
-      <Button color="#077D28" title="Create" onPress={() => {}} />
+      <Button color="#077D28" title="Create" onPress={() => { }} />
 
       <View style={styles.footer}>
         <Text style={{ fontSize: 24, color: "#C4C4C4" }}>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "black",
-    marginRight: 10,
+    marginRight: 10
   },
   button: {
     backgroundColor: "#077D28",
