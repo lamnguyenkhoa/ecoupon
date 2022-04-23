@@ -31,11 +31,11 @@ function HomeScreen({ navigation }) {
       ></Image> */}
 
       <Button
-        title="Go to Camera"
+        title="Face new challenges ⭐"
         onPress={() => navigation.navigate("ChallengeCamera")}
       />
       <Button
-        title="Go to Coupons page"
+        title="See your coupons"
         onPress={() => navigation.navigate("Coupons")}
       />
     </View>

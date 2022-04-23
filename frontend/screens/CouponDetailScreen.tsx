@@ -3,6 +3,7 @@ import { View } from "../components/Themed";
 import { SingleCoupon } from "../types";
 import { useState } from "react";
 import { CouponItemDetail } from "../components/coupons/CouponItemDetail";
+import { Ionicons } from "@expo/vector-icons";
 
 //@ts-ignore
 export function CouponDetailScreen({ navigation }) {
@@ -38,7 +39,7 @@ export function CouponDetailScreen({ navigation }) {
         remaining={dummyData.remaining}
       />
       <Button
-        title="Go to Coupons page"
+        title="Back to Coupons"
         onPress={() => navigation.navigate("Coupons")}
       />
     </View>
