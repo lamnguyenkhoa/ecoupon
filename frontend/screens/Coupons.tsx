@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: "1rem",
+    padding: 12,
   },
   name: {
     flexDirection: "column",
-    fontSize: "1rem",
+    fontSize: 12,
     textAlign: "center",
   },
   avatar: {
@@ -35,11 +35,11 @@ const styles = StyleSheet.create({
   rightBulkArea: {
     flexDirection: "column",
     justifyContent: "space-between",
-    paddingTop: "1rem",
+    paddingTop: 12,
   },
   trees: {
     flexDirection: "row",
-    fontSize: "1.25rem",
+    fontSize: 15,
   },
   treeLogo: {
     height: 63,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   listTitle: {
     fontSize: 28,
     textAlign: "center",
-    marginBottom: "1rem",
+    marginBottom: 12,
   },
 });
 export function Coupons({ navigation }: RootTabScreenProps<"Coupons">) {
