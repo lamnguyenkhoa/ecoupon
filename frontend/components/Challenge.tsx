@@ -81,7 +81,7 @@ export function Challenge(props) {
                         fontFamily: "serif",
                     }}
                 >
-                    {`${props.percentage}%`}
+                    {props.percentage}
                 </Text>
             </View>
 

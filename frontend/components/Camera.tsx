@@ -7,8 +7,9 @@ import {
   Dimensions,
   Platform,
   ScrollView,
-  ImageBackground,
-  TouchableOpacity,
+  Modal,
+  Pressable,
+  TouchableOpacity
 } from "react-native";
 import { Camera } from "expo-camera";
 import { Challenge } from "./Challenge";
@@ -28,49 +29,48 @@ const vegetable = require("../assets/images/salad.jpg");
 const sticker = require("../assets/images/sticker.webp");
 const pepsi = require("../assets/images/pepsi.png");
 
-const challenges = [
-  {
-    icon: vest,
-    brand: HnM,
-    preview: shirt,
-    percentage: 15,
-  },
-  {
-    icon: vegetable,
-    brand: coles,
-    preview: salad,
-    percentage: 2,
-  },
-  {
-    icon: pepsi,
-    brand: pepsi,
-    preview: sticker,
-    percentage: 5,
-  },
-];
+const challenges = [{
+  'icon': vest,
+  'brand': HnM,
+  'preview': shirt,
+  'percentage': '15%'
+}, {
+  'icon': vegetable,
+  'brand': coles,
+  'preview': salad,
+  'percentage': '2%'
+},
+{
+  'icon': pepsi,
+  'brand': pepsi,
+  'preview': sticker,
+  'percentage': '🌳'
+}
+]
 
-//@ts-ignore
+// @ts-ignore
 export function ChallengeCamera({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraReady, setCameraReady] = useState(false);
   const [desiredRatio, setDesiredRatio] = useState("16:9");
   const [scroll, setScroll] = useState(0);
   const cameraRef = useRef(null);
+  const [modalVisible, setModalVisible] = useState(true);
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
   const shutterEffect = () => {
     Animated.sequence([
       // @ts-ignore
       Animated.timing(fadeAnim, {
-        toValue: 0,
+        toValue: 0.1,
         duration: 150,
-        useNativeDriver: false,
+        useNativeDriver: true,
       }),
       // @ts-ignore
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 100,
-        useNativeDriver: false,
+        useNativeDriver: true,
       }),
     ]).start();
   };
@@ -114,11 +114,18 @@ export function ChallengeCamera({ navigation }) {
       console.log(photo);
       // shutterEffect();
     }
+
+    // Check if snap is valid
+    let challengeDone = true
+    if (challengeDone) {
+
+    }
+
+
   };
 
   let challengeObjs = [];
   for (let [i, challenge] of challenges.entries()) {
-    console.log("debug ->", i);
     challengeObjs.push(
       <Challenge
         key={i}
@@ -132,7 +139,6 @@ export function ChallengeCamera({ navigation }) {
         percentage={challenge.percentage}
       ></Challenge>
     );
-    console.log(challengeObjs);
   }
 
   return (
@@ -148,6 +154,28 @@ export function ChallengeCamera({ navigation }) {
           setRatio();
         }}
       >
+
+        {/* <Modal
+          animationType='slide'
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>You got a coupon!</Text>
+              <Pressable
+                style={[styles.modalButton, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={styles.textStyle}>Hide Modal</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal> */}
+
         {/* Carousel */}
         <ScrollView
           decelerationRate="fast"
@@ -224,5 +252,46 @@ const styles = StyleSheet.create({
   carousel: {
     alignSelf: "flex-end",
     marginBottom: 20 + snapButtonBorderThickness,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  },
+  modalButton: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
   },
 });
