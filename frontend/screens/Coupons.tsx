@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
   },
   header: {
     position: "relative",
-    height: "10.625rem",
+    height: 170,
   },
   backNav: {
     position: "absolute",
     left: 0,
-    marginTop: "0.625rem",
-    marginLeft: "0.625rem",
+    marginTop: 10,
+    marginLeft: 10,
     flexDirection: "row",
   },
   name: {
@@ -50,13 +50,13 @@ const styles = StyleSheet.create({
   rightBulkArea: {
     position: "absolute",
     right: 0,
-    marginTop: "0.625rem",
-    marginRight: "0.625rem",
+    marginTop: 10,
+    marginRight: 10,
   },
   trees: {
     flexDirection: "row",
-    fontSize: "1.25rem",
-    marginBottom: "3.5rem",
+    fontSize: 20,
+    marginBottom: 56,
   },
   treeLogo: {
     height: 63,
