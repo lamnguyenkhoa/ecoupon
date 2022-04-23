@@ -10,7 +10,7 @@ import {
   Modal,
   Pressable,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
 } from "react-native";
 import { Camera } from "expo-camera";
 import { Challenge } from "./Challenge";
@@ -33,24 +33,26 @@ const pepsi = require("../assets/images/pepsi.png");
 const coupon = require("../assets/images/coupon.png");
 const confetti = require("../assets/images/confetti.gif");
 
-const challenges = [{
-  'icon': vest,
-  'brand': HnM,
-  'preview': shirt,
-  'percentage': '15%'
-}, {
-  'icon': vegetable,
-  'brand': kfc,
-  'preview': salad,
-  'percentage': '25%'
-},
-{
-  'icon': pepsi,
-  'brand': pepsi,
-  'preview': sticker,
-  'percentage': '🌳'
-}
-]
+const challenges = [
+  {
+    icon: vest,
+    brand: HnM,
+    preview: shirt,
+    percentage: "15%",
+  },
+  {
+    icon: vegetable,
+    brand: kfc,
+    preview: salad,
+    percentage: "25%",
+  },
+  {
+    icon: pepsi,
+    brand: pepsi,
+    preview: sticker,
+    percentage: "🌳",
+  },
+];
 
 // @ts-ignore
 export function ChallengeCamera({ navigation }) {
@@ -120,14 +122,12 @@ export function ChallengeCamera({ navigation }) {
     }
 
     // Check if snap is valid
-    let challengeDone = true
+    let challengeDone = true;
     if (challengeDone) {
       // @ts-ignore
-      cameraRef.current?.pausePreview()
-      setModalVisible(true)
+      cameraRef.current?.pausePreview();
+      setModalVisible(true);
     }
-
-
   };
 
   let challengeObjs = [];
@@ -150,23 +150,15 @@ export function ChallengeCamera({ navigation }) {
   return (
     // @ts-ignore
     <Animated.View style={[styles.effectcontainer, { opacity: fadeAnim }]}>
-      <Modal
-        animationType='slide'
-        transparent={true}
-        visible={modalVisible}
-      >
-
-
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <View style={styles.centeredView}>
-
-
           <View style={styles.modalView}>
             <Text style={styles.modalText}>You got a coupon! 🎉</Text>
 
             <ImageBackground
               source={coupon}
               imageStyle={{
-                resizeMode: 'center'
+                resizeMode: "center",
               }}
               style={{ width: width * 0.95, height: 220 }}
             ></ImageBackground>
@@ -174,9 +166,9 @@ export function ChallengeCamera({ navigation }) {
             <Pressable
               style={[styles.modalButton, styles.buttonClose]}
               onPress={() => {
-                setModalVisible(false)
+                setModalVisible(false);
                 // @ts-ignore
-                cameraRef.current?.resumePreview()
+                cameraRef.current?.resumePreview();
               }}
             >
               <Text style={styles.textStyle}>x</Text>
@@ -230,17 +222,18 @@ export function ChallengeCamera({ navigation }) {
           style={{
             position: "absolute",
             left: "5%",
-            top: "10%",
+            top: "5%",
             backgroundColor: "#fff",
             borderRadius: 50,
-            height: 35,
-            width: 35,
+            padding: 10,
             flex: 1,
+            flexDirection: "row",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
           <Ionicons name="arrow-back-outline" size={20} color="black" />
+          <Text style={{ fontWeight: "bold" }}>Coupon</Text>
         </TouchableOpacity>
       </Camera>
     </Animated.View>
@@ -280,7 +273,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
+    marginTop: 22,
   },
   modalView: {
     marginBottom: 30,
@@ -290,11 +283,11 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 5
+    elevation: 5,
   },
   buttonClose: {
     backgroundColor: "black",
@@ -302,14 +295,14 @@ const styles = StyleSheet.create({
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
   },
   modalText: {
     marginTop: 20,
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: "#E00026",
-    fontFamily: "serif"
+    fontFamily: "serif",
   },
   modalButton: {
     marginBottom: 20,
