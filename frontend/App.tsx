@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ChallengeCamera } from "./components/Camera";
 import { Coupons } from "./screens/Coupons";
 import { CouponDetailScreen } from "./screens/CouponDetailScreen";
+import Login from "./screens/Login";
 
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
@@ -54,11 +55,12 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName="Login"
           screenOptions={{
             headerShown: false,
           }}
         >
+          <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="ChallengeCamera" component={ChallengeCamera} />
           <Stack.Screen name="Coupons" component={Coupons} />

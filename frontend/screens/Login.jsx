@@ -20,7 +20,7 @@ function Login({ navigation }) {
   const [password, setPassword] = useState("");
   const { colorMode } = useColorMode();
   const onSignInWithGoogle = () => {
-    navigation.navigate("ChallengeCamera");
+    navigation.navigate("HomeScreen");
   };
 
   return (
