@@ -6,6 +6,7 @@ import { ChallengeCamera } from "./components/Camera";
 import { Coupons } from "./screens/Coupons";
 import { CouponDetailScreen } from "./screens/CouponDetailScreen";
 import Login from "./screens/Login";
+import { BChallenge } from "./screens/BusinessChallengeTemplate";
 
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
@@ -65,6 +66,7 @@ export default function App() {
           <Stack.Screen name="ChallengeCamera" component={ChallengeCamera} />
           <Stack.Screen name="Coupons" component={Coupons} />
           <Stack.Screen name="CouponDetail" component={CouponDetailScreen} />
+          <Stack.Screen name="Business" component={BChallenge} />
         </Stack.Navigator>
       </NavigationContainer>
     );

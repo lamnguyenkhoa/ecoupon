@@ -22,6 +22,9 @@ function Login({ navigation }) {
   const onSignInWithGoogle = () => {
     navigation.navigate("HomeScreen");
   };
+  const onOpenBusinessTemplate = () => {
+    navigation.navigate("Business");
+  };
 
   return (
     <NativeBaseProvider>
@@ -67,6 +70,7 @@ function Login({ navigation }) {
               type="submit"
               colorScheme="teal"
               w="100%"
+              onPress={onOpenBusinessTemplate}
             >
               Login
             </Button>

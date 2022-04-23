@@ -18,6 +18,7 @@ const linking: LinkingOptions<RootStackParamList> = {
       NotFound: "*",
       CouponDetail: "couponDetail",
       CouponList: "couponList",
+      Business: "business",
     },
   },
 };
