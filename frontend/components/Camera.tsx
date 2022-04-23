@@ -184,7 +184,7 @@ export function ChallengeCamera({ navigation }) {
       <Camera
         style={styles.camera}
         ratio={desiredRatio}
-        type={Camera.Constants.Type.front}
+        type={Camera.Constants.Type.back}
         ref={cameraRef}
         onCameraReady={() => {
           setCameraReady(true);
