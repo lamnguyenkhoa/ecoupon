@@ -39,11 +39,12 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
   >;
 
 export type SingleCoupon = {
-  id: String;
-  title: String;
-  desc: String;
-  company: String;
-  validBefore: String;
-  remaining: Number;
+  id: string;
+  title: string;
+  desc: string;
+  company: string;
+  validBefore: string;
+  remaining: number;
+  logo: string;
 };
 export type CouponList = Array<SingleCoupon>;
