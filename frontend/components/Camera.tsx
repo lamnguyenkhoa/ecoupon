@@ -9,7 +9,7 @@ import {
   ScrollView,
   Modal,
   Pressable,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { Camera } from "expo-camera";
 import { Challenge } from "./Challenge";
@@ -29,24 +29,26 @@ const vegetable = require("../assets/images/salad.jpg");
 const sticker = require("../assets/images/sticker.webp");
 const pepsi = require("../assets/images/pepsi.png");
 
-const challenges = [{
-  'icon': vest,
-  'brand': HnM,
-  'preview': shirt,
-  'percentage': '15%'
-}, {
-  'icon': vegetable,
-  'brand': coles,
-  'preview': salad,
-  'percentage': '2%'
-},
-{
-  'icon': pepsi,
-  'brand': pepsi,
-  'preview': sticker,
-  'percentage': '🌳'
-}
-]
+const challenges = [
+  {
+    icon: vest,
+    brand: HnM,
+    preview: shirt,
+    percentage: "15%",
+  },
+  {
+    icon: vegetable,
+    brand: coles,
+    preview: salad,
+    percentage: "2%",
+  },
+  {
+    icon: pepsi,
+    brand: pepsi,
+    preview: sticker,
+    percentage: "🌳",
+  },
+];
 
 // @ts-ignore
 export function ChallengeCamera({ navigation }) {
@@ -116,12 +118,9 @@ export function ChallengeCamera({ navigation }) {
     }
 
     // Check if snap is valid
-    let challengeDone = true
+    let challengeDone = true;
     if (challengeDone) {
-
     }
-
-
   };
 
   let challengeObjs = [];
@@ -154,7 +153,6 @@ export function ChallengeCamera({ navigation }) {
           setRatio();
         }}
       >
-
         {/* <Modal
           animationType='slide'
           transparent={true}
@@ -207,17 +205,18 @@ export function ChallengeCamera({ navigation }) {
           style={{
             position: "absolute",
             left: "5%",
-            top: "10%",
+            top: "5%",
+            padding: 10,
             backgroundColor: "#fff",
             borderRadius: 50,
-            height: 35,
-            width: 35,
             flex: 1,
+            flexDirection: "row",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
           <Ionicons name="arrow-back-outline" size={20} color="black" />
+          <Text style={{ fontWeight: "bold" }}>Coupon</Text>
         </TouchableOpacity>
       </Camera>
     </Animated.View>
@@ -257,7 +256,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
+    marginTop: 22,
   },
   modalView: {
     margin: 20,
@@ -268,11 +267,11 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 5
+    elevation: 5,
   },
   buttonOpen: {
     backgroundColor: "#F194FF",
@@ -283,15 +282,15 @@ const styles = StyleSheet.create({
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
-    textAlign: "center"
+    textAlign: "center",
   },
   modalButton: {
     borderRadius: 20,
     padding: 10,
-    elevation: 2
+    elevation: 2,
   },
 });
