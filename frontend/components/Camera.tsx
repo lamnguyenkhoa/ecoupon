@@ -9,7 +9,8 @@ import {
   ScrollView,
   Modal,
   Pressable,
-  TouchableOpacity
+  TouchableOpacity,
+  ImageBackground
 } from "react-native";
 import { Camera } from "expo-camera";
 import { Challenge } from "./Challenge";
@@ -23,11 +24,14 @@ const HnM = require("../assets/images/HnM.png");
 const shirt = require("../assets/images/shirt.png");
 
 const salad = require("../assets/images/greenfood.png");
-const coles = require("../assets/images/Coles.png");
+const kfc = require("../assets/images/kfc-logo.png");
 const vegetable = require("../assets/images/salad.jpg");
 
 const sticker = require("../assets/images/sticker.webp");
 const pepsi = require("../assets/images/pepsi.png");
+
+const coupon = require("../assets/images/coupon.png");
+const confetti = require("../assets/images/confetti.gif");
 
 const challenges = [{
   'icon': vest,
@@ -36,9 +40,9 @@ const challenges = [{
   'percentage': '15%'
 }, {
   'icon': vegetable,
-  'brand': coles,
+  'brand': kfc,
   'preview': salad,
-  'percentage': '2%'
+  'percentage': '25%'
 },
 {
   'icon': pepsi,
@@ -118,7 +122,9 @@ export function ChallengeCamera({ navigation }) {
     // Check if snap is valid
     let challengeDone = true
     if (challengeDone) {
-
+      // @ts-ignore
+      cameraRef.current?.pausePreview()
+      setModalVisible(true)
     }
 
 
@@ -144,6 +150,45 @@ export function ChallengeCamera({ navigation }) {
   return (
     // @ts-ignore
     <Animated.View style={[styles.effectcontainer, { opacity: fadeAnim }]}>
+      <Modal
+        animationType='slide'
+        transparent={true}
+        visible={modalVisible}
+      >
+
+
+        <View style={styles.centeredView}>
+
+
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>You got a coupon! 🎉</Text>
+
+            <ImageBackground
+              source={coupon}
+              imageStyle={{
+                resizeMode: 'center'
+              }}
+              style={{ width: width * 0.95, height: 220 }}
+            ></ImageBackground>
+
+            <Pressable
+              style={[styles.modalButton, styles.buttonClose]}
+              onPress={() => {
+                setModalVisible(false)
+                // @ts-ignore
+                cameraRef.current?.resumePreview()
+              }}
+            >
+              <Text style={styles.textStyle}>x</Text>
+            </Pressable>
+          </View>
+          <ImageBackground
+            source={confetti}
+            style={{ width: width, height: height * 0.2 }}
+          ></ImageBackground>
+        </View>
+      </Modal>
+
       <Camera
         style={styles.camera}
         ratio={desiredRatio}
@@ -154,28 +199,6 @@ export function ChallengeCamera({ navigation }) {
           setRatio();
         }}
       >
-
-        {/* <Modal
-          animationType='slide'
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(!modalVisible);
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>You got a coupon!</Text>
-              <Pressable
-                style={[styles.modalButton, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}
-              >
-                <Text style={styles.textStyle}>Hide Modal</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Modal> */}
-
         {/* Carousel */}
         <ScrollView
           decelerationRate="fast"
@@ -260,10 +283,9 @@ const styles = StyleSheet.create({
     marginTop: 22
   },
   modalView: {
-    margin: 20,
+    marginBottom: 30,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -274,11 +296,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5
   },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "black",
   },
   textStyle: {
     color: "white",
@@ -286,12 +305,19 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   modalText: {
-    marginBottom: 15,
-    textAlign: "center"
+    marginTop: 20,
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: "#E00026",
+    fontFamily: "serif"
   },
   modalButton: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2
+    marginBottom: 20,
+    borderRadius: Math.round((width + height) / 2),
+    width: 35,
+    height: 35,
+    elevation: 2,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
