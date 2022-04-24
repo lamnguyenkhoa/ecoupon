@@ -19,6 +19,7 @@ import { CouponDetailScreen } from "../screens/CouponDetailScreen";
 import { Coupons } from "../screens/Coupons";
 import { ChallengeCamera } from "../components/Camera";
 import { BChallenge } from "../screens/BusinessChallengeTemplate";
+import { SensorTest } from "../screens/SensorTest"
 import {
   RootStackParamList,
   RootTabParamList,
@@ -73,6 +74,11 @@ function RootNavigator() {
       <Stack.Screen
         name="Business"
         component={BChallenge}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SensorT"
+        component={SensorTest}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

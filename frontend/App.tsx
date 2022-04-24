@@ -7,6 +7,7 @@ import { Coupons } from "./screens/Coupons";
 import { CouponDetailScreen } from "./screens/CouponDetailScreen";
 import Login from "./screens/Login";
 import { BChallenge } from "./screens/BusinessChallengeTemplate";
+import { SensorTest } from "./screens/SensorTest"
 
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
@@ -40,6 +41,10 @@ function HomeScreen({ navigation }) {
         title="See your coupons"
         onPress={() => navigation.navigate("Coupons")}
       />
+      <Button
+        title="Sensor Test"
+        onPress={() => navigation.navigate("SensorT")}
+      />
     </View>
   );
 }
@@ -67,6 +72,7 @@ export default function App() {
           <Stack.Screen name="Coupons" component={Coupons} />
           <Stack.Screen name="CouponDetail" component={CouponDetailScreen} />
           <Stack.Screen name="Business" component={BChallenge} />
+          <Stack.Screen name="SensorT" component={SensorTest} />
         </Stack.Navigator>
       </NavigationContainer>
     );
