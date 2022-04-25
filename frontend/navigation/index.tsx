@@ -20,6 +20,7 @@ import { Coupons } from "../screens/Coupons";
 import { ChallengeCamera } from "../components/Camera";
 import { BChallenge } from "../screens/BusinessChallengeTemplate";
 import { SensorTest } from "../screens/SensorTest"
+import TFTest from "../screens/TFTest"
 import {
   RootStackParamList,
   RootTabParamList,
@@ -79,6 +80,11 @@ function RootNavigator() {
       <Stack.Screen
         name="SensorT"
         component={SensorTest}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="TFT"
+        component={TFTest}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
